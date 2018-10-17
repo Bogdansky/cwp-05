@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
     handler(req, res, payload, (err, result) => {
       if (err) {
         log(`\nurl: ${req.url}`);
-        log(`\nRequest:${payload}`);
+        log(`\nRequest:${JSON.stringify(payload)}`);
         res.statusCode = err.code;
         res.setHeader('Content-Type', 'application/json');
         res.end( JSON.stringify(err) );

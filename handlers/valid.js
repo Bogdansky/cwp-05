@@ -33,29 +33,19 @@ function getLastFromPos(url, pos){
 function checkCreateArticle(payload){
     if (payload.length != 5){
         return false;
-    }
-    if (typeof payload.title !== 'string'){
+    } // no
+    if (typeof payload.title !== 'string' &&
+        typeof payload.text !== 'string' && 
+        typeof payload.date !== 'number' && 
+        typeof payload.author !== 'string' &&
+        typeof payload.comments !== 'object'){
         return false;
     }
-    if (typeof payload.text !== 'string'){
-        return false;
-    }
-    if (typeof payload.date !== 'number'){
-        return false;
-    } 
-    if (typeof payload.author !== 'string'){
-        return false;
-    }
-    if (typeof payload.comments !== 'object'){
-        return false;
+    if (payload.comments === '[]'){
+        return true;
     }
     else{
-        if (payload.comments === '[]'){
-        return true;
-        }
-        else{
         return checkCreateComment(payload.comments);
-        }
     }
 }
 
@@ -63,16 +53,10 @@ function checkCreateComment(payload){
     if (payload==='undefined'){
         return false;
     }
-    if (typeof payload.articleId !== 'number' || typeof payload.articleId !== 'string'){
-        return false;
-    }
-    if (typeof payload.text !== 'string'){
-        return false;
-    }
-    if (typeof payload.date !== 'number'){
-        return false;
-    }
-    if (typeof payload.author !== 'string'){
+    if ((typeof payload.articleId !== 'number' || typeof payload.articleId !== 'string') && 
+        typeof payload.text !== 'string' &&
+        typeof payload.date !== 'number'&&
+        typeof payload.author !== 'string'){
         return false;
     }
     return true;
